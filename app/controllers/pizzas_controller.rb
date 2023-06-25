@@ -1,32 +1,48 @@
 class PizzasController < ApplicationController
     def index
-        pizza= Pizza.all 
-        render json: pizza
+      # Retrieve all pizzas from the database
+      pizza = Pizza.all
+      # Render the pizzas as JSON
+      render json: pizza
     end
-
+  
     def show
-        pizzas = Pizza.find_by(id: params[:id])
-        render json: pizzas
+      # Find a specific pizza by its ID
+      pizzas = Pizza.find_by(id: params[:id])
+      # Render the pizza as JSON
+      render json: pizzas
     end
-
+  
     def create
-        pizza = Pizza.create(pizza_params)
-        render json: pizza
+      # Create a new pizza with the provided parameters
+      pizza = Pizza.create(pizza_params)
+      # Render the created pizza as JSON
+      render json: pizza
     end
-
+  
     def update
-        pizza = Pizza.find(params[:id])
-        pizza.update(pizza_params)
-        render json: pizza
+      # Find a specific pizza by its ID
+      pizza = Pizza.find(params[:id])
+      # Update the pizza with the provided parameters
+      pizza.update(pizza_params)
+      # Render the updated pizza as JSON
+      render json: pizza
     end
-
+  
     def destroy
-        pizza = Pizza.find(params[:id])
-        pizza.destroy
-        render json: pizza
+      # Find a specific pizza by its ID
+      pizza = Pizza.find(params[:id])
+      # Destroy (delete) the pizza from the database
+      pizza.destroy
+      # Render the destroyed pizza as JSON
+      render json: pizza
     end
+  
     private
+  
+    # Define the permitted parameters for creating/updating a pizza
     def pizza_params
-        params.require(:pizza).permit(:name, :ingredients)
+      params.require(:pizza).permit(:name, :ingredients)
     end
-end
+  end
+  
