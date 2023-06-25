@@ -1,0 +1,115 @@
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePizzas (20230321095956)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "pizzas" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "ingredients" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230321095956"]]
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateRestaurants (20230321100043)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "restaurants" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "address" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230321100043"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateRestaurantPizzas (20230321100111)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "restaurant_pizzas" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "restaurant_id" integer NOT NULL, "pizza_id" integer NOT NULL, "price" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f279821f06"
+FOREIGN KEY ("restaurant_id")
+  REFERENCES "restaurants" ("id")
+, CONSTRAINT "fk_rails_ab3bb148dc"
+FOREIGN KEY ("pizza_id")
+  REFERENCES "pizzas" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_restaurant_pizzas_on_restaurant_id" ON "restaurant_pizzas" ("restaurant_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_restaurant_pizzas_on_pizza_id" ON "restaurant_pizzas" ("pizza_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230321100111"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-06-25 12:28:28.470482"], ["updated_at", "2023-06-25 12:28:28.470482"]]
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas"[0m
+  [1m[36mRestaurantPizza Load (0.2ms)[0m  [1m[34mSELECT "restaurant_pizzas".* FROM "restaurant_pizzas"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Fast Creamery"], ["address", "Apt. 456 38415 Isaiah Crescent, South Adrianna, AK 45631"], ["created_at", "2023-06-25 12:28:29.497845"], ["updated_at", "2023-06-25 12:28:29.497845"]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Spice King"], ["address", "Suite 856 560 Feest Throughway, West Filibertofurt, PA 05439-1968"], ["created_at", "2023-06-25 12:28:29.503878"], ["updated_at", "2023-06-25 12:28:29.503878"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "UQY Spoon"], ["address", "Apt. 210 423 Mante Turnpike, East Sundaybury, MI 95306"], ["created_at", "2023-06-25 12:28:29.508280"], ["updated_at", "2023-06-25 12:28:29.508280"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Belly Diner"], ["address", "68912 Lisandra Ferry, West Geraldville, CT 54545-2594"], ["created_at", "2023-06-25 12:28:29.512610"], ["updated_at", "2023-06-25 12:28:29.512610"]]
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Hungry King"], ["address", "Apt. 245 13670 Mante Plains, East Raymond, SC 84651-3612"], ["created_at", "2023-06-25 12:28:29.517070"], ["updated_at", "2023-06-25 12:28:29.517070"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Cranberry"], ["ingredients", "[\"Apple Juice\", \"Kidney Beans\", \"Hummus\"]"], ["created_at", "2023-06-25 12:28:29.524627"], ["updated_at", "2023-06-25 12:28:29.524627"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Pork"], ["ingredients", "[\"Cayenne\", \"Tabasco\", \"Kidneys\"]"], ["created_at", "2023-06-25 12:28:29.528661"], ["updated_at", "2023-06-25 12:28:29.528661"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Barley"], ["ingredients", "[\"Soy Beans\", \"Sesame Oil\", \"Tofu\"]"], ["created_at", "2023-06-25 12:28:29.532430"], ["updated_at", "2023-06-25 12:28:29.532430"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Tea"], ["ingredients", "[\"Pinto Beans\", \"Borlotti Beans\", \"Bonza\"]"], ["created_at", "2023-06-25 12:28:29.536239"], ["updated_at", "2023-06-25 12:28:29.536239"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Chickory"], ["ingredients", "[\"Avocado Spread\", \"Morwong\", \"Coconut\"]"], ["created_at", "2023-06-25 12:28:29.539923"], ["updated_at", "2023-06-25 12:28:29.539923"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" WHERE "pizzas"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mRestaurantPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("restaurant_id", "pizza_id", "price", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["restaurant_id", 1], ["pizza_id", 4], ["price", 21], ["created_at", "2023-06-25 12:28:29.554507"], ["updated_at", "2023-06-25 12:28:29.554507"]]
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" WHERE "pizzas"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mRestaurantPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("restaurant_id", "pizza_id", "price", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["restaurant_id", 4], ["pizza_id", 3], ["price", 9], ["created_at", "2023-06-25 12:28:29.560536"], ["updated_at", "2023-06-25 12:28:29.560536"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" WHERE "pizzas"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mRestaurantPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("restaurant_id", "pizza_id", "price", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["restaurant_id", 4], ["pizza_id", 5], ["price", 30], ["created_at", "2023-06-25 12:28:29.566531"], ["updated_at", "2023-06-25 12:28:29.566531"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" WHERE "pizzas"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mRestaurantPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("restaurant_id", "pizza_id", "price", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["restaurant_id", 5], ["pizza_id", 3], ["price", 11], ["created_at", "2023-06-25 12:28:29.572458"], ["updated_at", "2023-06-25 12:28:29.572458"]]
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mPizza Load (0.0ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" WHERE "pizzas"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mRestaurantPizza Create (0.1ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("restaurant_id", "pizza_id", "price", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["restaurant_id", 3], ["pizza_id", 4], ["price", 21], ["created_at", "2023-06-25 12:28:29.578217"], ["updated_at", "2023-06-25 12:28:29.578217"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2023-06-25 15:29:03 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/alanlepar/.rbenv/versions/2.7.4/lib/ruby/gems/2.7.0/gems/railties-7.0.4.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/alanlepar/.rbenv/versions/2.7.4/lib/ruby/gems/2.7.0/gems/railties-7.0.4.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 6.9ms | Allocations: 766)
+Completed 200 OK in 18ms (Views: 12.0ms | ActiveRecord: 0.0ms | Allocations: 6651)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2023-06-25 22:04:20 +0300
+Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  ↳ app/controllers/restaurants_controller.rb:6:in `index'
+Completed 200 OK in 26ms (Views: 17.7ms | ActiveRecord: 0.7ms | Allocations: 19927)
+
+
